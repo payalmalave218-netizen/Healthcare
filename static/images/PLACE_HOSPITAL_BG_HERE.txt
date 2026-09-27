@@ -1,0 +1,12 @@
+﻿Put your professional hospital background image here:
+
+File name: hospital-bg.jpg
+Folder: static/images/
+
+Example full path (your PC):
+C:\Users\ASUS\OneDrive\Desktop\Hospital Management system.py\static\images\hospital-bg.jpg
+
+Then refresh the login page:
+http://localhost:5000/login
+
+
