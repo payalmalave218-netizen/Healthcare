@@ -1,0 +1,77 @@
+===============================================
+HEALIX HOSPITAL - QUICK START
+===============================================
+
+STEP 1: Run Diagnostic (Optional but Recommended)
+-------------------------------------------------
+python test_setup.py
+
+This will check if everything is set up correctly.
+
+
+STEP 2: Start the Application
+-------------------------------
+Option A - Double-click: run_debug.bat (Windows)
+
+Option B - Command Line:
+    python app.py
+
+
+STEP 3: Open Your Browser
+--------------------------
+Go to: http://localhost:5000
+
+
+STEP 4: Login
+-------------
+Username: admin
+Password: admin123
+
+
+===============================================
+TROUBLESHOOTING
+===============================================
+
+If the app doesn't start:
+
+1. Run: python test_setup.py
+   This will tell you what's wrong
+
+2. Check if Flask is installed:
+   pip install Flask
+
+3. Check if port 5000 is available
+   If not, change port in app.py (line 259)
+
+4. Make sure you're in the correct folder
+   The folder should contain: app.py, database/, templates/, static/
+
+5. See TROUBLESHOOTING.md for detailed help
+
+
+===============================================
+WHAT TO EXPECT
+===============================================
+
+When you run "python app.py", you should see:
+- Database initialization message
+- "Running on http://127.0.0.1:5000"
+- Server ready message
+
+Then open browser to http://localhost:5000
+You'll see a login page with a blue gradient background.
+
+
+===============================================
+FEATURES
+===============================================
+
+✓ Login System
+✓ Dashboard with statistics
+✓ Patient Management (Add, View, Edit, Delete)
+✓ Search Patients
+✓ Appointment Scheduling
+✓ Modern, Responsive UI
+
+
+===============================================

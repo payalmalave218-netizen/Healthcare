@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}View Patient - HEALIX HOSPITAL{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <div>
+            <h1><i class="fas fa-user"></i> Patient Details</h1>
+            <p>Patient ID: {{ patient.patient_id }}</p>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit Patient
+            </a>
+            <a href="{{ url_for('patients') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+    
+    <div class="patient-details-grid">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-info-circle"></i> Personal Information</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Full Name</label>
+                        <p>{{ patient.first_name }} {{ patient.last_name }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Date of Birth</label>
+                        <p>{{ patient.date_of_birth }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Gender</label>
+                        <p>{{ patient.gender }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Blood Group</label>
+                        <p>{{ patient.blood_group or 'Not specified' }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Phone</label>
+                        <p>{{ patient.phone or 'Not provided' }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Email</label>
+                        <p>{{ patient.email or 'Not provided' }}</p>
+                    </div>
+                    <div class="info-item full-width">
+                        <label>Address</label>
+                        <p>{{ patient.address or 'Not provided' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Emergency Contact</h2>
+            </div>
+            <div class="card-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Contact Name</label>
+                        <p>{{ patient.emergency_contact_name or 'Not provided' }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Contact Phone</label>
+                        <p>{{ patient.emergency_contact_phone or 'Not provided' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if patient.medical_history %}
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-file-medical"></i> Medical History</h2>
+            </div>
+            <div class="card-body">
+                <p>{{ patient.medical_history }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-calendar-check"></i> Appointments</h2>
+        </div>
+        <div class="card-body">
+            {% if appointments %}
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Doctor</th>
+                            <th>Department</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.appointment_date }}</td>
+                            <td>{{ appointment.appointment_time }}</td>
+                            <td>{{ appointment.doctor_name or '-' }}</td>
+                            <td>{{ appointment.department or '-' }}</td>
+                            <td>{{ appointment.reason or '-' }}</td>
+                            <td><span class="badge badge-{{ appointment.status }}">{{ appointment.status }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="empty-state">No appointments scheduled for this patient.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-file-medical-alt"></i> Medical Records</h2>
+        </div>
+        <div class="card-body">
+            {% if medical_records %}
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Doctor</th>
+                            <th>Diagnosis</th>
+                            <th>Prescription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in medical_records %}
+                        <tr>
+                            <td>{{ record.record_date }}</td>
+                            <td>{{ record.doctor_name or '-' }}</td>
+                            <td>{{ record.diagnosis or '-' }}</td>
+                            <td>{{ record.prescription or '-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="empty-state">No medical records available for this patient.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
